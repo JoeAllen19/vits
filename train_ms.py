@@ -101,8 +101,8 @@ def run(rank, n_gpus, hps):
   net_d = DDP(net_d, device_ids=[rank])
 
   try:
-    _, _, _, epoch_str = utils.load_checkpoint(utils.latest_checkpoint_path(hps.model_dir, "G.pth"), net_g, optim_g)
-    _, _, _, epoch_str = utils.load_checkpoint(utils.latest_checkpoint_path(hps.model_dir, "D.pth"), net_d, optim_d)
+    _, _, _, epoch_str = utils.load_checkpoint(os.path.join(hps.model_dir, "G.pth"), net_g, optim_g)
+    _, _, _, epoch_str = utils.load_checkpoint(os.path.join(hps.model_dir, "D.pth"), net_d, optim_d)
     global_step = (epoch_str - 1) * len(train_loader)
   except:
     epoch_str = 1
